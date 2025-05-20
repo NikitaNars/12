@@ -20,31 +20,23 @@
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock FontSize="26">Список дел</TextBlock>
         </StackPanel>
-        <ListBox Name="listToDO" Background="#FDF5DF" Margin="10" Grid.Row="1" Grid.Column="0">
-            <StackPanel>
-                <ListBoxItem>Приготовить покушать</ListBoxItem>
-                <ListBoxItem>15.01.2024</ListBoxItem>
-                <ListBoxItem>Нет описания</ListBoxItem>
-            </StackPanel>
 
-            <StackPanel>
-                <ListBoxItem>Пооработать</ListBoxItem>
-                <ListBoxItem>20.01.2024</ListBoxItem>
-                <ListBoxItem>Съездить на совещание в Москву</ListBoxItem>
-            </StackPanel>
-
-            <StackPanel>
-                <ListBoxItem>Отдохнуть</ListBoxItem>
-                <ListBoxItem>01.02.2024</ListBoxItem>
-                <ListBoxItem>Съездить в отпуск в соич</ListBoxItem>
-            </StackPanel>
-            
+        <ListBox Name="listToDo"  Background="#FDF5DF" Margin="10" Grid.Row="1" Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=GetName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"/>
+                        <TextBlock Text="{Binding Path=GetDescription}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
-            <CheckBox IsChecked="True">Добавление новых дел</CheckBox>
+            <CheckBox Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" IsChecked="True">Добавление новых дел</CheckBox>
         </StackPanel>
-        <GroupBox Name="groupBoxToDo" Background="#FDF5DF" Grid.Row="1" Grid.Column="1" Margin="10">
+        <GroupBox  Name="groupBoxToDo" Background="#FDF5DF" Grid.Row="1" Grid.Column="1" Margin="10">
             <StackPanel Margin="5">
                 <TextBlock Margin="0,5,0,0">Название:</TextBlock>
                 <TextBox Name="titleToDo" Margin="0,10,0,0"></TextBox>
@@ -55,10 +47,10 @@
             </StackPanel>
         </GroupBox>
         <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Background="#5EBEC4">Удалить дело</Button>
+            <Button Background="#5EBEC4" Click="KillItem">Удалить дело</Button>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Name="buttonAdd" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">Добвавить дело</Button>
+            <Button Name="buttonAdd"  Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">Добвавить дело</Button>
         </StackPanel>
     </Grid>
 </Window>
